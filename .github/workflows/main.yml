@@ -53,28 +53,28 @@ jobs:
               context: .
               push: true
               tags: muzafferjoya/flask:app-${{ github.run_number }}
-  # modifygit:
-  #   needs: docker
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       name: changing the deployment of git repo
-  #       with:
-  #         repository: 'muzafferjoya/flask-k8s'
-  #         token: ${{ secrets.GIT_PASSWORD }}
-  #     - name: modify the image
-  #       run: |
-  #         git config user.email muzafferjoya@gmail.com
-  #         git config user.name Muzaffar khan
-  #         pwd
-  #         cat deployment.yaml
-  #         pwd
-  #         sed -i "s+muzafferjoya/flask.*+muzafferjoya/flask:app-$RUN_NUMBER+g" deployment.yaml
-  #         cat deployment.yaml
-  #         git add .
-  #         git commit -m 'Done  by Github Actions   Job changemanifest: ${{ github.run_number }}'
-  #         git push origin main
-  #       env:
-  #         GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
-  #         GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
-  #         RUN_NUMBER: ${{ github.run_number }}
+  modifygit:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: changing the deployment of git repo
+        with:
+          repository: 'muzafferjoya/flask-manifest'
+          token: ${{ secrets.GIT_PASSWORD }}
+      - name: modify the image
+        run: |
+          git config user.email muzafferjoya@gmail.com
+          git config user.name Muzaffar khan
+          pwd
+          cat deployment.yaml
+          pwd
+          sed -i "s+muzafferjoya/flask.*+muzafferjoya/flask:app-$RUN_NUMBER+g" deployment.yaml
+          cat deployment.yaml
+          git add .
+          git commit -m 'Done  by Github Actions   Job changemanifest: ${{ github.run_number }}'
+          git push origin main
+        env:
+          GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+          GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
+          RUN_NUMBER: ${{ github.run_number }}
