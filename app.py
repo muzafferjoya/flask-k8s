@@ -11,11 +11,11 @@ def hello_world():
             font-family: Arial, sans-serif;
         }
         h1 {
-            color: #333;
+            color: blue;
             font-size: 36px;
         }
         h2 {
-            color: #555;
+            color: red;
             font-size: 28px;
         }
         center {
